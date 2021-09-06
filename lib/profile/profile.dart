@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/profile/Utility/utility.dart';
 
 class ImageGetter extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class ImageGetter extends StatefulWidget {
 
 class _ImageGetterState extends State<ImageGetter> {
   File? image;
+  Image? imageFromPreference;
 
   Future pickImage() async {
     try {
@@ -18,11 +20,25 @@ class _ImageGetterState extends State<ImageGetter> {
 
       final imageTemp = File(image.path);
       setState(() {
+        Utility.saveProfilePic(
+            Utility.base64String(imageTemp.readAsBytesSync()));
         this.image = imageTemp;
       });
     } on PlatformException catch (e) {
       print('Access Rejected: $e');
     }
+  }
+
+  loadImage() {
+    Utility.getProfilePic().then((img) {
+      if (img == null) {
+        return;
+      }
+      setState(() {
+      imageFromPreference = Utility.imageFromBase64String(img);  
+      });
+      
+    });
   }
 
   @override
@@ -38,8 +54,8 @@ class _ImageGetterState extends State<ImageGetter> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: image != null
-                  ? Image.file(image!)
-                  : Image.asset("assets/Soud.jpg"),
+                  ? loadImage()
+                  : Image.asset("assets/images/user.png"),
             ),
           ),
           SizedBox(height: 12),
@@ -84,3 +100,5 @@ class _ImageGetterState extends State<ImageGetter> {
     );
   }
 }
+
+// Image.file(image!)//
