@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_getter/profile/Form.dart';
-import 'package:image_getter/profile/profile.dart';
+import 'Form.dart';
+import 'profile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
