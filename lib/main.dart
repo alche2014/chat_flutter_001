@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_blackwhite_02/Ui_Theme.dart';
+import 'package:task_blackwhite_02/Welcome_Screen/MainWelcome.dart';
 // import 'package:task_blackwhite_02/Welcome_Screen/MainWelcome.dart';
-import 'package:task_blackwhite_02/profile/profilePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
       darkTheme: darkThemeData(context),
-      home: ProfilePage(),
+      home: WelcomeScreen(),
     );
   }
 }

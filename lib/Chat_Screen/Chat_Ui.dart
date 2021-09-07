@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_blackwhite_02/Chat_Screen/Components/Chatbody.dart';
+import 'package:task_blackwhite_02/BottomNavigation/BottomNavBar.dart';
 import 'package:task_blackwhite_02/constColors.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -12,20 +12,20 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(),
+      // appBar: myAppBar(),
       //-----------------------//
-      body: ChatBody(),
+      body: NavBar(0),
       //----------------------//
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: kPrimaryGreen,
-        child: Icon(
-          Icons.person_add_alt_1,
-          color: Colors.white,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   backgroundColor: kPrimaryGreen,
+      //   child: Icon(
+      //     Icons.person_add_alt_1,
+      //     color: Colors.white,
+      //   ),
+      // ),
       //----------------------------------------------//
-      bottomNavigationBar: buildBottomNavBar(),
+      // bottomNavigationBar: buildBottomNavBar(),
       //--------------------------------------------//
     );
   }
@@ -45,10 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
         BottomNavigationBarItem(icon: Icon(Icons.messenger), label: "Chat"),
         BottomNavigationBarItem(icon: Icon(Icons.people), label: "People"),
         BottomNavigationBarItem(icon: Icon(Icons.call), label: "Call"),
-        BottomNavigationBarItem(
-            icon: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/user_2.png')),
-            label: 'Profile'),
+        BottomNavigationBarItem(icon: Icon(Icons.call), label: "Call"),
       ],
     );
   }

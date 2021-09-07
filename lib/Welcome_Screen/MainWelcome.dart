@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:task_blackwhite_02/Log_Screens/Sign_inOut.dart';
 import 'package:task_blackwhite_02/constColors.dart';
 
 import '../Tab.dart';
 
+
+//use welcome screen to run app
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

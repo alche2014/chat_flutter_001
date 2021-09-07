@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:task_blackwhite_02/profile/Utility/utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ImageGetter extends StatefulWidget {
   @override
@@ -11,34 +11,31 @@ class ImageGetter extends StatefulWidget {
 
 class _ImageGetterState extends State<ImageGetter> {
   File? image;
-  Image? imageFromPreference;
+  String? imagePath;
 
   Future pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
 
-      final imageTemp = File(image.path);
+      File imageTemp = File(image.path);
+      
       setState(() {
-        Utility.saveProfilePic(
-            Utility.base64String(imageTemp.readAsBytesSync()));
         this.image = imageTemp;
+        // saveImage(this.image);
       });
+      saveImage(image.path);
     } on PlatformException catch (e) {
       print('Access Rejected: $e');
     }
   }
 
-  loadImage() {
-    Utility.getProfilePic().then((img) {
-      if (img == null) {
-        return;
-      }
-      setState(() {
-      imageFromPreference = Utility.imageFromBase64String(img);  
-      });
-      
-    });
+  @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+    super.initState();
+    loadImage();
   }
 
   @override
@@ -48,16 +45,18 @@ class _ImageGetterState extends State<ImageGetter> {
         children: [
           //=======================================//
           SizedBox(height: 10),
-          CircleAvatar(
-            radius: (40),
-            backgroundColor: Colors.transparent,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: image != null
-                  ? loadImage()
-                  : Image.asset("assets/images/user.png"),
-            ),
-          ),
+          imagePath != null
+              ? CircleAvatar(backgroundImage: FileImage(File(imagePath!)),radius: 40)
+              : CircleAvatar(
+                  radius: (40),
+                  backgroundColor: Colors.transparent,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: image != null
+                        ? Image.file(image!)
+                        : Image.asset("assets/images/user.png"),
+                  ),
+                ),
           SizedBox(height: 12),
           Text('Name Here', style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 5),
@@ -99,6 +98,24 @@ class _ImageGetterState extends State<ImageGetter> {
       ),
     );
   }
+
+  void saveImage(path) async {
+    SharedPreferences saveimage = await SharedPreferences.getInstance();
+    saveimage.setString('saveImage', path);
+  }
+
+  void loadImage() async {
+    SharedPreferences saveimage = await SharedPreferences.getInstance();
+    setState(() {
+      imagePath = saveimage.getString('saveImage');
+    });
+  }
 }
 
 // Image.file(image!)//
+// Utility.saveProfilePic(
+//     Utility.base64String(imageTemp.readAsBytesSync()));
+// SharedPreferences prefs = await SharedPreferences.getInstance();
+// prefs.setString('test_image', localImage.path)
+
+
