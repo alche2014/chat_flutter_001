@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_blackwhite_02/Profile_Edit/profilePage.dart';
+import 'package:task_blackwhite_02/Profile/secondProfile.dart';
+
 
 class MyProfile extends StatelessWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class MyProfile extends StatelessWidget {
             headTitle: 'Personal Information',
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+                  MaterialPageRoute(builder: (context) => SecondProfile()));
             }),
         ProfileCard(headTitle: 'Education Information'),
         ProfileCard(headTitle: 'Experience Information'),

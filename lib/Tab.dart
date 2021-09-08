@@ -16,6 +16,7 @@ class _MyTabBarViewState extends State<MyTabBarView>
   TabController? _controller;
 
   @override
+  // ignore: must_call_super
   void initState() {
     _controller = TabController(length: 2, vsync: this, initialIndex: 0);
   }
