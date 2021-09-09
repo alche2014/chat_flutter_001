@@ -14,106 +14,142 @@ class _SecondProfileState extends State<SecondProfile> {
   String fathername = "";
   String email = "";
   String phone = "";
+  String address = "";
+  String cnic = "";
+  String date = "";
+  String gender = "";
+  String status = "";
 
-  _SecondProfileState() {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {});
     UserSaveData.instance
         .getStringValue("username")
         .then((value) => setState(() {
               username = value;
             }));
-
     UserSaveData.instance
         .getStringValue("fathername")
         .then((value) => setState(() {
               fathername = value;
             }));
-
-    UserSaveData.instance.getStringValue("email").then((value) => setState(() {
-          email = value;
-        }));
-    UserSaveData.instance.getStringValue("phone").then((value) => setState(() {
-          phone = value;
-        }));
+        UserSaveData.instance
+        .getStringValue("email")
+        .then((value) => setState(() {
+              email = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("address")
+        .then((value) => setState(() {
+              address = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("cnic")
+        .then((value) => setState(() {
+              cnic = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("phone")
+        .then((value) => setState(() {
+              phone = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("date")
+        .then((value) => setState(() {
+              date = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("gender")
+        .then((value) => setState(() {
+              gender = value;
+            }));
+        UserSaveData.instance
+        .getStringValue("status")
+        .then((value) => setState(() {
+              status = value;
+            }));
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Form(
-          child: ListView(
-            children: [
-              SizedBox(height: 40),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(children: [
-                      CircleAvatar(
-                        radius: (50),
-                        backgroundColor: Colors.transparent,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.asset("assets/images/user.png"),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 40),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        CircleAvatar(
+                          radius: (50),
+                          backgroundColor: Colors.transparent,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset("assets/images/user.png"),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Name Here',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
-                          Text('Front-End UI',
-                              style: TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                    ]),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditMyProfile()));
-                      },
-                      child: FittedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        SizedBox(width: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Edit'),
-                            SizedBox(width: 2),
-                            Icon(Icons.edit_outlined, size: 18),
+                            Text('Name Here',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 10),
+                            Text('Front-End UI',
+                                style: TextStyle(color: Colors.grey)),
                           ],
                         ),
+                      ]),
+                      
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditMyProfile()));
+                        },
+                        child: FittedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Edit'),
+                              SizedBox(width: 2),
+                              Icon(Icons.edit_outlined, size: 18),
+                            ],
+                          ),
+                          // ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
+                //==========================================================//
+                SizedBox(height: 30),
+                Column(
+                  children: [
+                    MyTextField(hint: username == "" ? 'Your Name' : username),
+                    MyTextField(hint: fathername == "" ? 'Your FatherName': fathername), // 2
+                    MyTextField(hint: email == "" ? 'Your Email' : email), // 3
+                    MyTextField(hint: phone == "" ? '0312-123456789' : phone), // 4
+                    MyTextField(hint: address == "" ? 'Address' : address), // 5
+                    MyTextField(hint: gender == "" ? 'Gender' : gender), //
+                    MyTextField(hint: status == "" ? 'Material Status' : status), // 6
+                    MyTextField(hint: cnic == "" ?  'CNIC' : cnic), // 7
+                    MyTextField(hint: date == "" ? 'Date of Birth' : date), // 8
+                    MyTextField(hint: 'Your Name'), // 9
+                    //=========================================================//
                   ],
                 ),
-              ),
-              //==========================================================//
-              SizedBox(height: 30),
-              Column(
-                children: [
-                  MyTextField(
-                      hint: username == "" ? 'Your Name' : username), // 1
-                  MyTextField(
-                      hint: fathername == ""
-                          ? 'Your FatherName'
-                          : fathername), // 2
-                  MyTextField(hint: email == "" ? 'Your Email' : email), // 3
-                  MyTextField(
-                      hint: phone == "" ? '0312-123456789' : phone), // 4
-                  MyTextField(hint: 'Your Name'), // 5
-                  MyTextField(hint: 'Your Name'), // 6
-                  MyTextField(hint: 'Your Name'), // 7
-                  MyTextField(hint: 'Your Name'), // 8
-                  MyTextField(hint: 'Your Name'), // 9
-                  //=========================================================//
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -156,3 +192,57 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
+//=====================ignore below==========================//
+  // _SecondProfileState() {
+  //   UserSaveData.instance
+  //       .getStringValue("username")
+  //       .then((value) => setState(() {
+  //             username = value;
+  //           }));
+
+  //   UserSaveData.instance
+  //       .getStringValue("fathername")
+  //       .then((value) => setState(() {
+  //             fathername = value;
+  //           }));
+
+  //   UserSaveData.instance.getStringValue("email").then((value) => setState(() {
+  //         email = value;
+  //       }));
+  //   UserSaveData.instance.getStringValue("phone").then((value) => setState(() {
+  //         phone = value;
+  //       }));
+  // }
+
+  // @override
+  // void initState() {
+  //       UserSaveData.instance
+  //       .getStringValue("username")
+  //       .then((value) => setState(() {
+  //             username = value;
+  //           }));
+  //   super.initState();
+  // }
+
+  // TextButton(
+  //   onPressed: () {
+  //     Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => EditMyProfile()));
+  //   },
+  //   child:
+
+    // saveData() {
+  //   // UserSaveData.instance
+  //   //     .getStringValue("username")
+  //   //     .then((value) => setState(() {
+  //   //           username = value;
+  //   //         }));
+
+  //   UserSaveData.instance
+  //       .getStringValue("fathername")
+  //       .then((value) => setState(() {
+  //             fathername = value;
+  //           }));
+  // }

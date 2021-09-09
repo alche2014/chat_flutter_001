@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_blackwhite_02/Profile/Utility/User_save_data.dart';
+import 'package:task_blackwhite_02/Profile/secondProfile.dart';
 
 class EditMyProfile extends StatefulWidget {
   const EditMyProfile({Key? key}) : super(key: key);
@@ -13,45 +14,47 @@ class _EditMyProfileState extends State<EditMyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: ListView(
-        children: [
-          SizedBox(height: 40),
-          //===============================================//
-          Center(
-            child: Stack(
-              //using stack to lap edit icon over Picture
-              children: [
-                ClipRRect(
-                  child: Image(
-                    height: 100,
-                    image: AssetImage('assets/images/user.png'),
-                  ),
-                ),
-                Positioned(
-                    bottom: 10,
-                    right: 5,
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 40),
+            //===============================================//
+            Center(
+              child: Stack(
+                //using stack to lap edit icon over Picture
+                children: [
+                  ClipRRect(
                     child: Image(
-                      image: AssetImage('assets/icons/iconBack.png'),
-                      width: 30,
-                      fit: BoxFit.cover,
-                    )),
-                Positioned(
-                    bottom: 15,
-                    right: 10,
-                    child: Icon(
-                      Icons.edit_outlined,
-                      size: 20,
-                      color: Colors.white,
-                    )),
-              ],
+                      height: 100,
+                      image: AssetImage('assets/images/user.png'),
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 10,
+                      right: 5,
+                      child: Image(
+                        image: AssetImage('assets/icons/iconBack.png'),
+                        width: 30,
+                        fit: BoxFit.cover,
+                      )),
+                  Positioned(
+                      bottom: 15,
+                      right: 10,
+                      child: Icon(
+                        Icons.edit_outlined,
+                        size: 20,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ),
-          ),
-          //===========================================//
-          FormOne(),
-          //===========================================//
+            //===========================================//
+            FormOne(),
+            //===========================================//
 
-          SizedBox(height: 20),
-        ],
+            SizedBox(height: 20),
+          ],
+        ),
       )),
     );
   }
@@ -64,13 +67,17 @@ class FormOne extends StatefulWidget {
 }
 
 class _FormOneState extends State<FormOne> {
-  var dropdownValue;
+  var dropCityValue;
+  var dropGenderValue;
+  var dropStatusValue;
+  var dateOfBirth;
 
   TextEditingController controllerUserName = new TextEditingController();
   TextEditingController controllerFatherName = new TextEditingController();
   TextEditingController controllerEmail = new TextEditingController();
   TextEditingController controllerAddress = new TextEditingController();
   TextEditingController controllerPhone = new TextEditingController();
+  TextEditingController controllerCNIC = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +87,7 @@ class _FormOneState extends State<FormOne> {
         child: Column(
           children: [
             //-------------------------------------------------//
-               //=============Username==================//
+            //=============Username==================//
             SizedBox(height: 15),
             TextFormField(
               controller: controllerUserName,
@@ -119,7 +126,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //=============Fathername==================//
+            //=============Fathername==================//
             TextFormField(
               controller: controllerFatherName,
               decoration: InputDecoration(
@@ -157,7 +164,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //=============City-Drop=================//
+            //=============City-Drop=================//
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -178,20 +185,24 @@ class _FormOneState extends State<FormOne> {
                     hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
                     hintText: "City",
                     fillColor: Theme.of(context).scaffoldBackgroundColor),
-                value: dropdownValue,
-                items: <String>['Lahore', 'Karachi','Islamabad']
+                value: dropCityValue,
+                items: <String>['Lahore', 'Karachi', 'Islamabad']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    dropCityValue = value;
+                  });
+                },
               ),
             ),
             SizedBox(height: 15),
             //============================================//
-                //=============Address=================//
+            //=============Address=================//
             TextFormField(
               controller: controllerAddress,
               decoration: InputDecoration(
@@ -229,7 +240,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //=============Email=================//
+            //=============Email=================//
             TextFormField(
               controller: controllerEmail,
               decoration: InputDecoration(
@@ -272,7 +283,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //=============Phone=================//
+            //=============Phone=================//
             TextFormField(
               controller: controllerPhone,
               decoration: InputDecoration(
@@ -309,7 +320,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //=============Gender=================//
+            //=============Gender=================//
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -330,7 +341,7 @@ class _FormOneState extends State<FormOne> {
                     hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
                     hintText: "Gender",
                     fillColor: Theme.of(context).scaffoldBackgroundColor),
-                value: dropdownValue,
+                value: dropGenderValue,
                 items: <String>['Male', 'Female', 'Other']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -338,12 +349,16 @@ class _FormOneState extends State<FormOne> {
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    dropGenderValue = value;
+                  });
+                },
               ),
             ),
             SizedBox(height: 15),
             //============================================//
-                //==========Material Status=========//
+            //==========Material Status=========//
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -364,7 +379,7 @@ class _FormOneState extends State<FormOne> {
                     hintStyle: TextStyle(color: Colors.grey.withOpacity(0.8)),
                     hintText: "Material Status",
                     fillColor: Theme.of(context).scaffoldBackgroundColor),
-                value: dropdownValue,
+                value: dropStatusValue,
                 items: <String>['Single', 'Married']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -372,14 +387,16 @@ class _FormOneState extends State<FormOne> {
                     child: Text(value),
                   );
                 }).toList(),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  dropStatusValue = value;
+                },
               ),
             ),
             SizedBox(height: 15),
             //============================================//
-                //===========CNIC===============//
+            //===========CNIC===============//
             TextFormField(
-              controller: controllerPhone,
+              controller: controllerCNIC,
               decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -414,7 +431,7 @@ class _FormOneState extends State<FormOne> {
             ),
             SizedBox(height: 15),
             //-------------------------------------------------//
-                //===========DateofBirth===========//
+            //===========DateofBirth===========//
             Container(
               height: 60,
               margin: EdgeInsets.symmetric(vertical: 10),
@@ -428,15 +445,25 @@ class _FormOneState extends State<FormOne> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Date of Birth', style: TextStyle(color: Colors.grey)),
+                  Text(
+                      dateOfBirth == null
+                          ? 'Date of Birth'
+                          : '${dateOfBirth!.day}/${dateOfBirth!.month}/${dateOfBirth!.year}'
+                              .toString(),
+                      style: TextStyle(color: Colors.grey)),
                   IconButton(
                       icon: Icon(Icons.today, color: Colors.grey),
                       onPressed: () {
                         showDatePicker(
-                            context: context,
-                            initialDate: DateTime(2005),
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime.now());
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2022))
+                            .then((value) {
+                          setState(() {
+                            dateOfBirth = value;
+                          });
+                        });
                       })
                 ],
               ),
@@ -457,18 +484,44 @@ class _FormOneState extends State<FormOne> {
                             borderRadius: BorderRadius.circular(10)),
                       ),
                       onPressed: () {
-                
+                        setState(() {});
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SecondProfile()));
+
+                        // Navigator.of(context).pushAndRemoveUntil(
+                        //     MaterialPageRoute(
+                        //         builder: (context) => SecondProfile()),
+                        //     (Route<dynamic> route) => false);
+
                         var getEmail = controllerEmail.text;
                         var getUserName = controllerUserName.text;
                         var getFatherName = controllerFatherName.text;
                         var getPhone = controllerPhone.text;
-                
+                        var getCnic = controllerCNIC.text;
+                        var getAddress = controllerAddress.text;
+                        var getCity = dropCityValue;
+                        var getGender = dropGenderValue;
+                        var getStatus = dropStatusValue;
+                        var getDate = dateOfBirth;
+
                         UserSaveData.instance.setStringValue("email", getEmail);
                         UserSaveData.instance
                             .setStringValue("username", getUserName);
                         UserSaveData.instance
                             .setStringValue("fathername", getFatherName);
                         UserSaveData.instance.setStringValue("phone", getPhone);
+                        UserSaveData.instance.setStringValue("cnic", getCnic);
+                        UserSaveData.instance.setStringValue("city", getCity);
+                        UserSaveData.instance
+                            .setStringValue("gender", getGender);
+                        UserSaveData.instance
+                            .setStringValue("status", getStatus);
+                        UserSaveData.instance
+                            .setStringValue("date", getDate.toString());
+                        UserSaveData.instance
+                            .setStringValue("address", getAddress);
                       },
                     ),
                   ),
