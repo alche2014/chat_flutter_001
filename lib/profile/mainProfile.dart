@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/Performance/mainPerformanePage.dart';
 import 'package:task_blackwhite_02/Profile/secondProfile.dart';
+import 'package:task_blackwhite_02/TeamRequest/MainTeamPage.dart';
+
+import '../constColors.dart';
 
 
 class MyProfile extends StatelessWidget {
@@ -7,21 +11,41 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Spacer(flex: 1),
-        ProfilePic(),
-        Divider(color: Colors.transparent),
-        ProfileCard(
-            headTitle: 'Personal Information',
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SecondProfile()));
-            }),
-        ProfileCard(headTitle: 'Education Information'),
-        ProfileCard(headTitle: 'Experience Information'),
-        Spacer(flex: 2),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Icon(Icons.arrow_back_ios, color: MediaQuery.of(context).platformBrightness == Brightness.light
+          ? kContentColorLightTheme
+          : Colors.grey),
+        title: Text('My Profile', style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.light
+          ? kContentColorLightTheme
+          : Colors.grey) )
+      ),
+      //===============================================//
+      body: Column(
+        children: [
+          Spacer(),
+          ProfilePic(),
+          Spacer(),
+          ProfileCard(
+              headTitle: 'Personal Information',
+              press: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SecondProfile()));
+              }),
+          ProfileCard(headTitle: 'Education Information', press: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyTeamView()));
+              }),
+          ProfileCard(headTitle: 'Experience Information', press: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainPerformancePage()));
+              }),
+          Spacer(flex: 2),
+        ],
+      ),
     );
   }
 }
@@ -73,6 +97,7 @@ class ProfileCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
         onTap: press,
+        borderRadius: BorderRadius.circular(10),
         child: Container(
           height: 100,
           decoration: BoxDecoration(

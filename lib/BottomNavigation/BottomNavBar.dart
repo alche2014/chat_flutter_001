@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_blackwhite_02/Chat_Screen/Components/Chatbody.dart';
+import 'package:task_blackwhite_02/LeaveManagement/LeaveManagement.dart';
 import 'package:task_blackwhite_02/Profile/mainProfile.dart';
 
 int? count;                   
@@ -19,7 +20,7 @@ class _NavBarState extends State<NavBar> {
 
   final tabs = [            //Assigning Tabs for bottom bar position Icon
     Center(child: ChatBody()),
-    Center(child: Text('Null')),
+    Center(child: LeaveManagement()),
     Center(child: Text('Null')),
     Center(child: MyProfile()),
   ];

@@ -30,7 +30,7 @@ ThemeData darkThemeData(BuildContext context) {
       appBarTheme: appBarTheme,
       iconTheme: IconThemeData(color: kContentColorDarkTheme),
       textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)
-          .apply(bodyColor: kContentColorDarkTheme),
+          .apply(bodyColor: Colors.grey),
       colorScheme: ColorScheme.dark().copyWith(
         primary: kPrimaryGreen,
         secondary: kSecondaryDarkYellow,
