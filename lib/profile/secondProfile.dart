@@ -144,7 +144,6 @@ class _SecondProfileState extends State<SecondProfile> {
                     MyTextField(hint: status == "" ? 'Material Status' : status), // 6
                     MyTextField(hint: cnic == "" ?  'CNIC' : cnic), // 7
                     MyTextField(hint: date == "" ? 'Date of Birth' : date), // 8
-                    MyTextField(hint: 'Your Name'), // 9
                     //=========================================================//
                   ],
                 ),
