@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/Events/mainEvents.dart';
 import 'package:task_blackwhite_02/My_Buttons/Primary_Button.dart';
 import 'package:task_blackwhite_02/constColors.dart';
 
@@ -178,7 +179,10 @@ class ResgiterForm extends StatelessWidget {
                 }),
             //-------------------------------------------------------------//
             Spacer(flex: 2),
-            PrimaryButton(text: 'Sign Up', press: (){},color: Theme.of(context).colorScheme.secondary,),
+            PrimaryButton(text: 'Sign Up', press: (){
+              Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => MainEvents()));
+            },color: Theme.of(context).colorScheme.secondary,),
             Spacer(),
           ],
         ),

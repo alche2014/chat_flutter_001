@@ -419,7 +419,7 @@ class _FormOneState extends State<FormOne> {
                   )),
               keyboardType: TextInputType.number,
               validator: (value) {
-                final regExp = RegExp('[0-9]');
+                final regExp = RegExp('/^[0-9]{5}-[0-9]{7}-[0-9]{1}/g');
                 if (value!.isEmpty) {
                   return null;
                 } else if (!regExp.hasMatch(value)) {

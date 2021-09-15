@@ -1,71 +1,77 @@
 import 'package:flutter/material.dart';
-
-final darkRed = Color(0xffbf2634);
-final lightPink = Color(0xffF8E7E9);
-final lightGreen = Color(0xffD6FBE0);
+import 'package:task_blackwhite_02/constColors.dart';
 
 // ignore: must_be_immutable
-class Chips extends StatelessWidget {
-  String text;
-
-  Chips(this.text);
-  @override
+class ChipsView extends StatelessWidget {
+   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
-      child: FittedBox(
-        child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: lightPink,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('$text', style: TextStyle(fontSize: 14,color: Colors.black)),
-                  SizedBox(width: 8),
-                  Icon(Icons.clear, size: 18, color: Colors.black),
-                ],
-              ),
-            )),
+      child: Wrap(
+      spacing: 9.0,
+      children: List<Widget>.generate(Chips.chipList.length, (int index) {
+      return Chip(
+      label: Text(Chips.chipList[index],
+        style: TextStyle(
+            color: MediaQuery.of(context).platformBrightness ==
+                    Brightness.light
+                ? Colors.black
+                : Colors.grey)),
+      backgroundColor: lightPink,
+      // deleteIconColor:
+      //   MediaQuery.of(context).platformBrightness == Brightness.light
+      //       ? Colors.black
+      //       : Colors.grey,
+      );
+      }),
       ),
     );
   }
 }
 
 //----------------Chip Maker-------------------------
-class Chipmaker extends StatefulWidget {
-  static List<String> choosed = [];
+class Chips extends StatefulWidget {
+  static List<String> chipList = [];
   @override
-  _ChipmakerState createState() => _ChipmakerState();
+  _ChipsState createState() => _ChipsState();
 }
 
-class _ChipmakerState extends State<Chipmaker> {
+class _ChipsState extends State<Chips> {
   @override
   void initState() {
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 6.0,
-      runSpacing: 6.0,
-      children: List<Widget>.generate(Chipmaker.choosed.length, (int index) {
-        return Chip(
-          label: Text(Chipmaker.choosed[index]),
-          onDeleted: () {
-            setState(() {
-              Chipmaker.choosed.removeAt(index);
-            });
-          },
-        );
-      }),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Wrap(
+        spacing: 3.0,
+        runSpacing: 4.0,
+        children: List<Widget>.generate(Chips.chipList.length, (int index) {
+          return Chip(
+            label: Text(Chips.chipList[index],
+                style: TextStyle(
+                    color: MediaQuery.of(context).platformBrightness ==
+                            Brightness.light
+                        ? Colors.black
+                        : Colors.grey)),
+            backgroundColor: lightPink,
+            deleteIconColor:
+                MediaQuery.of(context).platformBrightness == Brightness.light
+                    ? Colors.black
+                    : Colors.grey,
+            onDeleted: () {
+              setState(() {
+                Chips.chipList.removeAt(index);
+              });
+            },
+          );
+        }),
+      ),
     );
   }
 }
-
 
 // ignore: must_be_immutable
 class DiscriptionField extends StatelessWidget {
@@ -102,7 +108,7 @@ class DiscriptionField extends StatelessWidget {
 
 Widget getTextField({required String hint}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child: SizedBox(
       height: 70,
       child: TextField(
@@ -117,8 +123,10 @@ Widget getTextField({required String hint}) {
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             filled: true,
+            suffixStyle: TextStyle(color: Colors.black),
             // fillColor: textFieldColor,
             hintText: hint,
+            // suffixText: 'YRS',
             hintStyle: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -127,3 +135,9 @@ Widget getTextField({required String hint}) {
     ),
   );
 }
+
+
+// MediaQuery.of(context).platformBrightness ==
+//         Brightness.light
+//     ? kPrimaryColor.withOpacity(0.7)
+//     : kContentColorLightTheme.withOpacity(0.7)

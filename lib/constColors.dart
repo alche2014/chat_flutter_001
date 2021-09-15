@@ -8,3 +8,6 @@ const kWarningYellowColor = Color(0xFFF3BB1C);
 const kErrorRedColor = Color(0xFFF03738);
 
 const kDefaultPadding = 20.0;
+final darkRed = Color(0xffbf2634);
+final lightPink = Color(0xffF8E7E9);
+final lightGreen = Color(0xffD6FBE0);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/AppBar/MyAppBar.dart';
+import 'package:task_blackwhite_02/Experience/ExperiencePage2.dart';
 import 'Utility/chips.dart';
 
 String dis =
@@ -10,6 +12,7 @@ class Experience extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildMyAppBar(context, 'Experience', false),
         body: SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -29,13 +32,7 @@ class Experience extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
               child: Wrap(
                 children: [
-                  //called from screen18
-                  Chips('Adobe PhotoShop'),
-                  Chips('Adobe XD'),
-                  Chips('Figma'),
-                  Chips('Figma'),
-                  Chips('Adobe PhotoShop'),
-                  Chips('Adobe XD'),
+                  ChipsView(),
                 ],
               ),
             ),
@@ -83,10 +80,10 @@ class ProfileEditCard extends StatelessWidget {
           ]),
           InkWell(
             onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => EditMyProfile()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ExperiencePageTwo()));
             },
             child: FittedBox(
               child: Row(
