@@ -19,7 +19,7 @@ class LeaveHistoryCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 7),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             border: Border.all(color: Colors.grey.withOpacity(0.1), width: 2)),

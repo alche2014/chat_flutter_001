@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/Experience/mainExperience.dart';
 import 'package:task_blackwhite_02/LeaveManagement/LeaveAppbar.dart';
 import 'package:task_blackwhite_02/LeaveManagement/LeaveHistory/LeaveHistory.dart';
 import 'package:task_blackwhite_02/LeaveManagement/Utility/LeaveCard.dart';
+import 'package:task_blackwhite_02/Request/MyRequest/MyRequest.dart';
+import 'package:task_blackwhite_02/Request/mainRequest.dart';
 
 final darkRed = Color(0xffbf2634);
 
@@ -40,9 +43,18 @@ class LeaveManagement extends StatelessWidget {
                       ),
                     ),
                   ),
-                  LeaveCard(text1),
-                  LeaveCard(text2),
-                  LeaveCard(text3),
+                  LeaveCard(text: text1, press: (){
+                    Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => Experience()));
+                  },),
+                  LeaveCard(text: text2, press: (){
+                                        Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => MainRequest()));
+                  }),
+                  LeaveCard(text: text3, press: (){
+                                        Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => MyRequest()));
+                  }),
                 ],
               ),
             ),

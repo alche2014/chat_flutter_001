@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/CheckInHistory/mainCheckIn.dart';
 import 'package:task_blackwhite_02/Events/mainEventsCard.dart';
 
 final darkRed = Color(0xffbf2634);
@@ -90,8 +91,8 @@ class StackedPics extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (contex) => JoindMembers()));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (contex) => MainCheckIn()));
                   },
                   child: Text(
                     'SHOW',

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:task_blackwhite_02/Experience/mainExperience.dart';
 import 'package:task_blackwhite_02/LeaveManagement/Utility/showDialog.dart';
 
 final Color darkredForWhite = Color(0xffbf2634);
@@ -10,18 +9,16 @@ final lightPink = Color(0xffF8E7E9);
 // ignore: must_be_immutable
 class LeaveCard extends StatelessWidget {
   //resue card but with chainging
-  String text;
-  LeaveCard(this.text);
+  String? text;
+  VoidCallback? press;
+  LeaveCard({this.text, this.press});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Experience())); 
-        },
+        onTap: press,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           decoration: BoxDecoration(
@@ -50,7 +47,7 @@ class LeaveCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 5),
-                      Text(text),
+                      Text(text!),
                       SizedBox(height: 5),
                       Text('20 anual leaves pending',
                           style: TextStyle(color: Colors.grey, fontSize: 10)),
@@ -61,7 +58,8 @@ class LeaveCard extends StatelessWidget {
                         child: Text(
                           //on card
                           'Apply Now',
-                          style: TextStyle(color: Colors.red[800], fontSize: 13),
+                          style:
+                              TextStyle(color: Colors.red[800], fontSize: 13),
                         ),
                       ),
                     ],
@@ -129,8 +127,7 @@ class MyCustomCard extends StatelessWidget {
                       Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color:
-                                status == true ? lightGreen : lightPink,
+                            color: status == true ? lightGreen : lightPink,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -138,7 +135,7 @@ class MyCustomCard extends StatelessWidget {
                                 ? Text('Approved', textAlign: TextAlign.center)
                                 : Text('Pending', textAlign: TextAlign.center),
                           )),
-                    //----------------------------------------//      
+                    //----------------------------------------//
                     if (statusToggle == false)
                       TextButton(
                         onPressed: () {},
@@ -152,8 +149,7 @@ class MyCustomCard extends StatelessWidget {
                                       : lightRedForDark),
                         ),
                       ),
-                    if(status == null)
-                    SizedBox(),  
+                    if (status == null) SizedBox(),
                   ],
                 ),
               ),
@@ -183,12 +179,14 @@ class MyCustomCard extends StatelessWidget {
                 ),
               if (picOrName == false)
                 Text('Name Here',
-                    style: TextStyle(color: MediaQuery.of(context).platformBrightness ==
-                                Brightness.light
-                            ? darkredForWhite
-                            : lightRedForDark, //color red
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,)),
+                    style: TextStyle(
+                      color: MediaQuery.of(context).platformBrightness ==
+                              Brightness.light
+                          ? darkredForWhite
+                          : lightRedForDark, //color red
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    )),
               if (picOrName == null) SizedBox(),
               //===============================================//
               SizedBox(height: 20.0),
