@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_blackwhite_02/AppBar/MyAppBar.dart';
-import 'package:task_blackwhite_02/constColors.dart';
 import 'Utility/chips.dart';
 
 class ExperiencePageTwo extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_blackwhite_02/Notifications/mainNotification.dart';
 import '../constColors.dart';
 
 
@@ -32,7 +33,12 @@ AppBar buildMyAppBar(BuildContext context, String name, bool turn ) {
                 ? kContentColorLightTheme
                 : Colors.grey,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainNotification()));
+          },
         )
     ],
   );

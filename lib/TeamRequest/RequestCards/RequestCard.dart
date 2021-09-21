@@ -209,8 +209,8 @@ class RequestCardSimple extends StatelessWidget {
 //----------------------------------------//
 
 class RequestCardImage extends StatelessWidget {
-  String header;
-  String body;
+  final String header;
+  final String body;
 
   RequestCardImage(this.header, this.body);
 

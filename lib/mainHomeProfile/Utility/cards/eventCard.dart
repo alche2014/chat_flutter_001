@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constColors.dart';
 
+// ignore: must_be_immutable
 class EventCard extends StatelessWidget {
   String date;
   String month;

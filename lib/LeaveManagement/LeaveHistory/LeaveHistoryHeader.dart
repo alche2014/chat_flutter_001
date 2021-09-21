@@ -70,8 +70,8 @@ class HeaderCard extends StatelessWidget {
 //=============================================================//
 
 class HeaderIconCard extends StatelessWidget {
-  String leaveHeader;
-  String leaveCount;
+  final String leaveHeader;
+  final String leaveCount;
 
   HeaderIconCard(this.leaveHeader, this.leaveCount);
 
