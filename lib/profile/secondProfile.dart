@@ -111,7 +111,7 @@ class _SecondProfileState extends State<SecondProfile> {
                       
                       InkWell(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EditMyProfile()));
